@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>SIKAP EKSYAR FEB UNMUL</title>
+  <!-- Pustaka Font & Icon -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Pustaka Grafik Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    :root { --primary: #047857; --primary-dark: #065f46; --bg-color: #f3f4f6; --surface: #ffffff; --text-primary: #1f2937; --text-secondary: #4b5563; --text-muted: #9ca3af; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { display: flex; height: 100vh; background-color: var(--bg-color); overflow: hidden; }
+    
+    /* ==========================================
+       🔐 SAAS PREMIUM LOGIN WAJIB (ABSOLUTE RULE COMPLIANT)
+       ========================================== */
+    @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+
+    #login-container {
+      position: fixed; inset: 0; z-index: 9999; background: linear-gradient(-45deg, #022c22, #065f46, #047857, #10b981);
+      background-size: 400% 400%; animation: gradientBG 15s ease infinite; display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .shape { position: absolute; filter: blur(60px); border-radius: 50%; z-index: 1; animation: float 8s ease-in-out infinite; }
+    .shape-1 { top: 10%; left: 15%; width: 300px; height: 300px; background: rgba(52, 211, 153, 0.4); }
+    .shape-2 { bottom: 10%; right: 15%; width: 400px; height: 400px; background: rgba(4, 120, 87, 0.5); animation-delay: -4s; }
+
+    .login-glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; z-index: 10; position: relative; }
+    .login-header { text-align: center; margin-bottom: 30px; }
+    .login-header i { font-size: 48px; color: #fff; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .login-header h2 { color: #fff; font-size: 24px; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
+    .login-header p { color: rgba(255,255,255,0.8); font-size: 13px; }
+
+    .form-group-login { margin-bottom: 20px; position: relative; }
+    .form-group-login label { display: block; color: rgba(255,255,255,0.9); font-size: 12px; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .input-login { width: 100%; padding: 14px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; color: #fff; font-size: 15px; outline: none; transition: all 0.3s ease; }
+    .input-login::placeholder { color: rgba(255,255,255,0.4); }
+    .input-login:focus { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.5); box-shadow: 0 0 0 4px rgba(255,255,255,0.1); }
+    .eye-icon { position: absolute; right: 16px; top: 40px; color: rgba(255,255,255,0.6); cursor: pointer; transition: 0.2s; } .eye-icon:hover { color: #fff; }
+
+    .login-options { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+    .remember-me { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.8); font-size: 13px; cursor: pointer; }
+    .remember-me input { accent-color: var(--primary); cursor: pointer; width: 16px; height: 16px; }
+
+    .btn-login { width: 100%; padding: 15px; background: #fff; color: var(--primary-dark); border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; gap: 10px; }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); }
+    .btn-login:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    .demo-account { margin-top: 25px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1); }
+    .demo-title { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; text-align: center; }
+    .demo-btns { display: flex; gap: 10px; justify-content: center; }
+    .btn-demo { flex: 1; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px; font-size: 12px; cursor: pointer; transition: 0.2s; display:flex; align-items:center; justify-content:center; gap:6px; }
+    .btn-demo:hover { background: rgba(255,255,255,0.2); }
+    .login-footer { text-align: center; margin-top: 30px; font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* ==========================================
+       DASHBOARD & RESPONSIVE LAYOUT
+       ========================================== */
+    .mobile-topbar { display: none; background: var(--primary); color: white; padding: 12px 20px; align-items: center; justify-content: space-between; z-index: 90; width: 100%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .btn-hamburger { background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .sidebar { width: 250px; background: var(--primary); color: white; display: flex; flex-direction: column; z-index: 100; transition: left 0.3s ease; }
+    .sidebar-header { padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .logo-icon { font-size: 24px; background: white; color: var(--primary); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0; }
+    .nav-menu { padding: 20px 0; list-style: none; flex-grow: 1; overflow-y: auto; }
+    .nav-item { padding: 12px 20px; margin: 5px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.8); transition: all 0.3s; font-size: 14px; }
+    .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: white; font-weight: 600; }
+    .main-content { flex-grow: 1; padding: 30px; overflow-y: auto; display: none; }
+    .page { display: none; animation: fadeIn 0.3s ease-in-out; } .page.active { display: block; }
+    .card { background: var(--surface); border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 24px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 24px; }
+    .stat-card { background: var(--surface); padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s; }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    .stat-value { font-size: 28px; font-weight: bold; color: var(--text-primary); margin-top: 10px; }
+    .stat-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; } th { text-align: left; padding: 12px 15px; border-bottom: 2px solid #e5e7eb; color: var(--text-secondary); font-size: 12px; font-weight: 600; text-transform: uppercase; } td { padding: 15px; border-bottom: 1px solid #e5e7eb; font-size: 14px; color: var(--text-primary); vertical-align: top; }
+    .btn { padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; } 
+    .btn-primary { background: var(--primary); color: white; } .btn-primary:hover { background: var(--primary-dark); } 
+    .btn-warning { background: #f59e0b; color: white; padding: 6px 10px; border-radius: 6px;} .btn-warning:hover { background: #d97706; }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+    .form-group { margin-bottom: 15px; width: 100%; } .form-group label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 600; color: var(--text-secondary); } .form-control { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; outline: none; transition: border 0.3s; } .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(4,120,87,0.1); }
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; } .badge-success { background: #d1fae5; color: #065f46; } .badge-warning { background: #fef3c7; color: #92400e; } .badge-info { background: #e0f2fe; color: #0369a1; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; } .modal-content { background: white; padding: 24px; border-radius: 12px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); } .toast { position: fixed; bottom: 20px; right: 20px; padding: 15px 20px; border-radius: 8px; color: white; font-weight: 600; display: none; z-index: 2000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); } .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px; }
+    
+    .import-box { background: #eff6ff; border: 1px dashed #3b82f6; padding: 20px; border-radius: 12px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .import-box-title { color: #1e3a8a; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+
+    @media (max-width: 768px) { body { flex-direction: column; overflow-y: auto; } .mobile-topbar { display: flex; } .sidebar { position: fixed; left: -260px; top: 0; height: 100vh; width: 250px; box-shadow: 10px 0 25px rgba(0,0,0,0.5); transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); display:none; } .sidebar.muncul { left: 0; display:flex; } .main-content { padding: 15px; width: 100%; } .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .header-flex { flex-direction: column; align-items: stretch; } .header-flex button, .header-flex select, .header-flex input { width: 100%; } .card { padding: 16px; } }
+    @media (max-width: 480px) { .stat-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       🔐 SAAS PREMIUM LOGIN WAJIB
+       ========================================== -->
+  <div id="login-container">
+    <div class="shape shape-1"></div><div class="shape shape-2"></div>
+    <div class="login-glass-card">
+      <div class="login-header">
+        <i class="fas fa-university"></i>
+        <h2>SIKAP EKSYAR</h2>
+        <p>Sistem Informasi Kinerja Akademik Prodi</p>
+      </div>
+      <div class="form-group-login">
+        <label>Username</label>
+        <input type="text" id="username" class="input-login" placeholder="Masukkan username admin">
+      </div>
+      <div class="form-group-login">
+        <label>Password</label>
+        <input type="password" id="password" class="input-login" placeholder="Masukkan password">
+        <i class="fas fa-eye eye-icon" id="togglePassword" onclick="togglePass()"></i>
+      </div>
+      <div class="login-options">
+        <label class="remember-me"><input type="checkbox" id="rememberMe" checked> Remember Me</label>
+      </div>
+      <button class="btn-login" id="btnLogin" onclick="login()">
+        <i class="fas fa-sign-in-alt"></i> Sign In to Dashboard
+      </button>
+      
+      <div class="demo-account">
+        <div class="demo-title">Demo Account (Absolute Rule)</div>
+        <div class="demo-btns">
+          <button class="btn-demo" onclick="autoFill('admin', 'admin123')"><i class="fas fa-bolt"></i> Auto Fill Default</button>
+        </div>
+      </div>
+      
+      <div class="login-footer">
+        Versi 18.0.0 (Netlify Ready & Final Fix)<br>
+        Generated by Bot AppScript<br>
+        By @opickdigital
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="mobile-topbar" id="mobile-nav" style="display:none;"><button class="btn-hamburger" onclick="toggleSidebarHP()"><i class="fas fa-bars"></i> Menu</button><div style="font-weight:bold; font-size:13px; text-align:right; line-height:1.2;">SIKAP EKSYAR<br><span style="font-size:10px; font-weight:normal;">FEB UNMUL</span></div></div>
+  <div id="sidebarBackdrop" onclick="toggleSidebarHP()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:95;"></div>
+
+  <div class="sidebar" id="main-sidebar" style="display:none;">
+    <div class="sidebar-header"><div class="logo-icon"><i class="fas fa-brain"></i></div><div><div style="font-weight:bold; font-size:14px; line-height:1.2;">SIKAP EKSYAR</div><div style="font-size:11px; opacity:0.9;">FEB UNMUL</div></div></div>
+    <ul class="nav-menu">
+      <li class="nav-item active" onclick="switchPage('dashboard')"><i class="fas fa-chart-pie"></i> Dashboard</li>
+      <li class="nav-item" onclick="switchPage('input')"><i class="fas fa-edit"></i> Input Kinerja</li>
+      <li class="nav-item" onclick="switchPage('rekap')"><i class="fas fa-table"></i> Rekap Per Dosen</li>
+      <li class="nav-item" onclick="switchPage('tahunan')"><i class="fas fa-calendar-alt"></i> Rekap Semester</li>
+      <li class="nav-item" onclick="switchPage('kajian')"><i class="fas fa-network-wired"></i> Peta Kajian Prodi</li>
+    </ul>
+    <div style="margin-top:auto; padding:20px;"><div style="font-size:11px; color:rgba(255,255,255,0.7); margin-bottom:10px; text-align:center;">Login sebagai: <b id="lblUserRole">Administrator</b></div><button class="btn" style="width:100%; background:rgba(255,255,255,0.1); color:white; justify-content:center;" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
+  </div>
+
+  <div class="main-content" id="main-app">
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page active">
+      <h2>Dashboard Kinerja</h2><p style="color:var(--text-secondary); margin-bottom:20px;">Ringkasan data Tridharma Perguruan Tinggi.</p>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-label">Total Dosen</div><div class="stat-value" id="dashTotalDosen">0</div></div>
+        <div class="stat-card" style="border-left-color: #3b82f6;"><div class="stat-label">Total Kinerja</div><div class="stat-value" id="dashTotalKinerja" style="color: #1e3a8a;">0</div></div>
+        <div class="stat-card" style="border-left-color: #10b981;"><div class="stat-label">Penelitian & Publikasi</div><div class="stat-value" id="dashTotalPenelitian" style="color: #065f46;">0</div></div>
+        <div class="stat-card" style="border-left-color: #f59e0b;"><div class="stat-label">Pengabdian (PKM)</div><div class="stat-value" id="dashTotalPKM" style="color: #92400e;">0</div></div>
+      </div>
+      <div class="card"><div class="header-flex"><h3>Buku Induk Data Dosen</h3><button class="btn btn-primary" onclick="bukaModalDosen()"><i class="fas fa-user-plus"></i> Tambah Dosen</button></div>
+        <div style="overflow-x:auto;"><table><thead><tr><th>No</th><th>Nama Lengkap</th><th>NIDN / NIP</th><th>Program Studi</th><th>Jabatan</th><th>Aksi</th></tr></thead><tbody id="tbodyDosen"><tr><td colspan="6" style="text-align:center;">Memuat data...</td></tr></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- INPUT KINERJA -->
+    <div id="page-input" class="page">
+      <div class="import-box">
+        <div class="import-box-title"><i class="fas fa-cloud-upload-alt"></i> Auto-Import Jurnal dari Google Scholar (Format CSV)</div>
+        <p style="font-size:12px; color:#3b82f6; margin-bottom:5px;">Pilih Nama Dosen Utama di form bawah terlebih dahulu, lalu unggah file CSV hasil *Export* Google Scholar.</p>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <input type="file" id="csvScholar" accept=".csv" class="form-control" style="flex:1; background:white; cursor:pointer;">
+          <button class="btn btn-primary" style="background:#2563eb;" onclick="importScholarCSV()" id="btnImportCSV"><i class="fas fa-rocket"></i> Proses Import CSV</button>
+        </div>
+      </div>
+      <div class="card"><h3 style="margin-bottom:20px;">Form Input Manual Kinerja Dosen</h3>
+        <div class="stat-grid" style="margin-bottom:0;"><div class="form-group"><label>Nama Dosen Utama (Wajib)</label><select id="inp_nama" class="form-control"><option value="">Memuat data...</option></select></div><div class="form-group"><label>Dosen Mitra</label><select id="inp_mitra" class="form-control" multiple style="height: 75px;"><option value="">Memuat data...</option></select></div></div>
+        <div class="stat-grid" style="margin-bottom:0;"><div class="form-group"><label>Semester & Tahun</label><input type="text" id="inp_semester" class="form-control" placeholder="Contoh: Genap 2024/2025"></div><div class="form-group"><label>Waktu Publish</label><input type="month" id="inp_publish" class="form-control"></div></div>
+        <div class="stat-grid" style="margin-bottom:0;"><div class="form-group"><label>Kategori Utama</label><select id="inp_kategori" class="form-control"><option value="Penelitian">Penelitian</option><option value="PKM">PKM (Pengabdian)</option><option value="Pendidikan">Pendidikan</option></select></div><div class="form-group"><label>Subkategori</label><select id="inp_subkategori" class="form-control"><option value="Jurnal Internasional Bereputasi">Jurnal Internasional</option><option value="Jurnal Sinta 1-2">Jurnal Sinta 1 & 2</option><option value="Jurnal Sinta 3-4">Jurnal Sinta 3 & 4</option><option value="Buku">Buku / Monograf</option><option value="Lainnya">Lainnya...</option></select></div></div>
+        <div class="form-group"><label>Judul Kegiatan / Artikel</label><textarea id="inp_judul" class="form-control" rows="3"></textarea></div>
+        <div class="form-group"><label>Link Bukti (Google Drive / URL)</label><input type="url" id="inp_link" class="form-control"></div>
+        <button class="btn btn-primary" onclick="simpanKinerja()" id="btnSimpanKinerja"><i class="fas fa-save"></i> Simpan ke Database</button>
+      </div>
+    </div>
+
+    <!-- REKAP DOSEN -->
+    <div id="page-rekap" class="page">
+      <div class="card">
+        <div class="header-flex"><h3>Rekap Kinerja Per Dosen</h3>
+            <div style="display:flex; gap:10px; width:100%; flex-wrap:wrap;">
+                <select id="filterDosenRekap" class="form-control" style="flex:1; min-width:180px;" oninput="renderRekapTable()"><option value="">-- Semua Dosen --</option></select>
+                <select id="filterKategoriRekap" class="form-control" style="width:140px;" oninput="renderRekapTable()"><option value="">-- Semua Kinerja --</option><option value="Penelitian">Hanya Penelitian</option><option value="PKM">Hanya PKM</option><option value="Pendidikan">Hanya Pendidikan</option></select>
+                <input type="number" id="filterAwalRekap" class="form-control" placeholder="Tahun Awal" style="width:100px;" oninput="renderRekapTable()">
+                <input type="number" id="filterAkhirRekap" class="form-control" placeholder="Tahun Akhir" style="width:100px;" oninput="renderRekapTable()">
+                <button class="btn btn-primary" style="background:#f3f4f6; color:#374151; border:1px solid #d1d5db;" onclick="loadRekap()"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </div>
+        <div id="rekapDosenStats" style="display:none; background:#f8fafc; padding:15px; border-radius:8px; margin-bottom:15px; border:1px solid #e2e8f0; justify-content:space-between; align-items:center;"><div style="font-weight:600; color:var(--primary);"><i class="fas fa-user-tie"></i> Rekap: <span id="statNamaDosen"></span></div><div style="display:flex; gap:15px; text-align:center;"><div><div id="statTotalDosen" style="font-size:16px; font-weight:bold;">0</div><div style="font-size:9px;">TOTAL</div></div><div><div id="statPenelitianDosen" style="font-size:16px; font-weight:bold;">0</div><div style="font-size:9px;">PENELITIAN</div></div><div><div id="statPKMDosen" style="font-size:16px; font-weight:bold;">0</div><div style="font-size:9px;">PKM</div></div></div></div>
+        <div style="overflow-x:auto;"><table><thead><tr><th>No</th><th>Tanggal</th><th>Nama Dosen</th><th>Semester/Publish</th><th>Kategori & Kajian</th><th>Judul</th><th>Status AI</th><th>Bukti Dokumen</th></tr></thead><tbody id="tbodyRekap"><tr><td colspan="8" style="text-align:center;">Memuat data...</td></tr></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- REKAP SEMESTER -->
+    <div id="page-tahunan" class="page">
+      <div class="card">
+        <div class="header-flex"><h3>Rekap Laporan Akreditasi</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; width:100%;">
+                <select id="filterTahunLaporan" class="form-control" style="flex:1; min-width:140px;" oninput="renderRekapTahunan()"><option value="">-- Semua Semester --</option></select>
+                <select id="filterBidangLaporan" class="form-control" style="flex:1; min-width:140px;" oninput="renderRekapTahunan()"><option value="">-- Semua Bidang --</option><option value="Penelitian">Khusus Penelitian</option><option value="PKM">Khusus PKM</option><option value="Pendidikan">Khusus Pendidikan</option></select>
+                <input type="number" id="filterAwalTahunan" class="form-control" placeholder="Tahun Awal" style="width:100px;" oninput="renderRekapTahunan()">
+                <input type="number" id="filterAkhirTahunan" class="form-control" placeholder="Tahun Akhir" style="width:100px;" oninput="renderRekapTahunan()">
+                <button class="btn btn-primary" style="background:#f3f4f6; color:#374151; border:1px solid #d1d5db;" onclick="loadRekap()"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </div>
+        <div class="stat-grid" style="margin-bottom:15px;">
+          <div class="stat-card" style="padding:15px; border-left-color:#3b82f6;"><div class="stat-label">Total (<span id="lblTahunPilih">Semua</span>)</div><div class="stat-value" id="statTahunTotal">0</div></div>
+          <div class="stat-card" style="padding:15px; border-left-color:#10b981;"><div class="stat-label">Penelitian</div><div class="stat-value" id="statTahunPenelitian">0</div></div>
+          <div class="stat-card" style="padding:15px; border-left-color:#f59e0b;"><div class="stat-label">PKM</div><div class="stat-value" id="statTahunPKM">0</div></div>
+          <div class="stat-card" style="padding:15px; border-left-color:#8b5cf6;"><div class="stat-label">Pendidikan</div><div class="stat-value" id="statTahunPendidikan">0</div></div>
+        </div>
+        <div style="overflow-x:auto;"><table><thead><tr><th>No</th><th>Semester / Publish</th><th>Nama Dosen</th><th>Bidang & Kategori</th><th>Judul Kegiatan</th><th>Peran</th><th>Bukti Dokumen</th></tr></thead><tbody id="tbodyTahunan"><tr><td colspan="7" style="text-align:center;">Memuat data...</td></tr></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- PETA KAJIAN -->
+    <div id="page-kajian" class="page">
+      <div class="card">
+        <div class="header-flex">
+          <div><h3>Peta Bidang Kajian Prodi</h3><p style="font-size:12px; color:var(--text-secondary);">Visualisasi Total Kinerja per Klaster Roadmap FEB.</p></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <input type="number" id="filterAwalKajian" class="form-control" placeholder="Tahun Awal" style="width:120px;" oninput="renderPetaKajian()">
+              <input type="number" id="filterAkhirKajian" class="form-control" placeholder="Tahun Akhir" style="width:120px;" oninput="renderPetaKajian()">
+              <button class="btn btn-primary" style="background:#f3f4f6; color:#374151; border:1px solid #d1d5db;" onclick="loadRekap()"><i class="fas fa-sync-alt"></i></button>
+          </div>
+        </div>
+        <div class="stat-grid" style="margin-bottom:20px;">
+          <div class="stat-card" style="padding:15px; border-left-color:#8b5cf6;"><div class="stat-label">Kajian Dominan</div><div class="stat-value" id="statKajianDominan" style="font-size:16px; color:#4c1d95;">Memuat...</div><div style="font-size:11px; margin-top:4px;" id="statKajianPorsi"></div></div>
+          <div class="stat-card" style="padding:15px; border-left-color:#10b981;"><div class="stat-label">Klaster Terisi</div><div class="stat-value" id="statTotalKajianItem" style="font-size:16px; color:#065f46;">0 Bidang</div><div style="font-size:11px; margin-top:4px;">Berdasarkan Tridharma</div></div>
+        </div>
+        <div style="background:#f8fafc; padding:20px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:20px; height:380px; width:100%; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);"><canvas id="chartKajianCanvas"></canvas></div>
+        <div style="overflow-x:auto;"><table><thead><tr><th>No</th><th>Klaster (Roadmap FEB)</th><th style="text-align:center;">Penelitian</th><th style="text-align:center;">PKM</th><th style="text-align:center;">Total Tridharma</th><th>Porsi (%)</th><th>Status</th></tr></thead><tbody id="tbodyKajian"><tr><td colspan="7" style="text-align:center;">Memuat hasil pemetaan...</td></tr></tbody></table></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DOSEN -->
+  <div class="modal-overlay" id="modalDosen"><div class="modal-content"><h3 id="modalDosenTitle" style="margin-bottom:15px;">Tambah Dosen Baru</h3><input type="hidden" id="dsn_id"><div class="form-group"><label>Nama Lengkap</label><input type="text" id="dsn_nama" class="form-control"></div><div class="form-group"><label>NIDN / NIP</label><input type="text" id="dsn_nidn" class="form-control"></div><div class="form-group"><label>Program Studi</label><input type="text" id="dsn_prodi" class="form-control"></div><div class="form-group"><label>Jabatan</label><input type="text" id="dsn_jabatan" class="form-control"></div><div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;"><button class="btn" style="background:#e5e7eb; color:#374151;" onclick="tutupModalDosen()">Batal</button><button class="btn btn-primary" onclick="simpanDosenBaru()">Simpan</button></div></div></div>
+  
+  <!-- MODAL EDIT BUKTI AKREDITASI -->
+  <div class="modal-overlay" id="modalEditBukti">
+    <div class="modal-content">
+      <h3 style="margin-bottom:15px;">Edit Link Bukti Kinerja</h3>
+      <p style="font-size:12px; color:var(--text-secondary); margin-bottom:15px;">Masukkan URL yang mengarah ke dokumen PDF Jurnal atau Google Drive agar Tim Asesor bisa memverifikasi.</p>
+      <input type="hidden" id="edit_nama_dosen">
+      <input type="hidden" id="edit_judul_kinerja">
+      <div class="form-group">
+        <label>Link Dokumen / Jurnal (URL)</label>
+        <input type="url" id="edit_link_baru" class="form-control" placeholder="https://drive.google.com/...">
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+        <button class="btn" style="background:#e5e7eb; color:#374151;" onclick="tutupModalEditBukti()">Batal</button>
+        <button class="btn btn-primary" onclick="simpanLinkBukti()">Simpan Bukti</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Notifikasi</div>
+
+  <script>
+    // ==========================================
+    // 🌐 VERCEL & NETLIFY API ADAPTER 
+    // ==========================================
+    // WAJIB DIGANTI DENGAN URL GOOGLE APPS SCRIPT WEB APP BOSS YANG ASLI (/exec)
+    const GAS_API_URL = "https://script.google.com/a/macros/gdrive1.biz.id/s/AKfycbxAQtzBkuJhL1XvQeRewZwx4BC-3km4PFTZJbp_wvRS35vyumwjp8JTUxJWtlJCHI-u/exec"; 
+
+    if (typeof google === 'undefined') {
+       window.google = { script: {} };
+       Object.defineProperty(window.google.script, 'run', {
+           get: function() {
+               return {
+                   onSuccess: null, onFailure: null,
+                   withSuccessHandler: function(cb) { this.onSuccess = cb; return this; },
+                   withFailureHandler: function(cb) { this.onFailure = cb; return this; },
+                   login: function(u, p) { this._get('login', {u, p}); },
+                   checkSession: function(token) { this._get('checkSession', {token}); },
+                   createDefaultAdmin: function() { if(this.onSuccess) this.onSuccess({success:true}); },
+                   getCurrentUser: function() { if(this.onSuccess) this.onSuccess({nama:'Admin'}); },
+                   changePassword: function() { if(this.onSuccess) this.onSuccess({success:true}); },
+                   updateProfile: function() { if(this.onSuccess) this.onSuccess({success:true}); },
+                   getDashboardData: function() { this._get('getDashboardData'); },
+                   getDataKinerja: function() { this._get('getDataKinerja'); },
+                   logout: function() { if(this.onSuccess) this.onSuccess({success:true}); },
+                   simpanKinerja: function(payload) { this._post('simpanKinerja', {payload}); },
+                   simpanDosen: function(payload) { this._post('simpanDosen', {payload}); },
+                   updateDosen: function(payload) { this._post('updateDosen', {payload}); },
+                   updateLinkKinerja: function(payload) { this._post('updateLinkKinerja', {payload}); },
+
+                   _get: function(action, params={}) {
+                      if(GAS_API_URL === "URL_WEB_APP_GAS_ANDA_DISINI") { if(this.onFailure) this.onFailure("URL Belum Diisi"); return; }
+                      let url = new URL(GAS_API_URL); url.searchParams.append('action', action);
+                      for(let k in params) url.searchParams.append(k, params[k]);
+                      fetch(url).then(r=>r.json()).then(data=> { if(this.onSuccess) this.onSuccess(data); }).catch(err=> { if(this.onFailure) this.onFailure(err); });
+                   },
+                   _post: function(action, body) {
+                      if(GAS_API_URL === "URL_WEB_APP_GAS_ANDA_DISINI") { if(this.onFailure) this.onFailure("URL Belum Diisi"); return; }
+                      body.action = action;
+                      fetch(GAS_API_URL, { method: 'POST', body: JSON.stringify(body) })
+                      .then(r=>r.json()).then(data=> { if(this.onSuccess) this.onSuccess(data); }).catch(err=> { if(this.onFailure) this.onFailure(err); });
+                   }
+               };
+           }
+       });
+    }
+
+    // ==========================================
+    // 🚑 DATA HEALER AI 
+    // ==========================================
+    function healData(d) {
+        let hd = { ...d };
+        let j = String(hd.judul || "").trim();
+        if ((j === "Penelitian" || j === "PKM" || j === "Pendidikan") && hd.semester && hd.semester.length > 15) {
+            hd.kategori = j; hd.judul = hd.semester; hd.subkategori = "Jurnal Import Scholar"; 
+            let extYear = hd.publish && hd.publish !== "-" ? hd.publish : (hd.tanggal ? hd.tanggal.substring(0,4) : new Date().getFullYear().toString());
+            hd.semester = "Tahun " + extYear;
+        }
+        if(hd.semester && typeof hd.semester === 'string' && hd.semester.includes("Semester Import")) hd.semester = hd.semester.replace("Semester Import ", "Tahun ");
+        return hd;
+    }
+
+    function getOfficialDosenName(rawName) {
+        if (!globalDosenData || globalDosenData.length === 0) return rawName; 
+        let rawStr = String(rawName).trim();
+        let rawClean = rawStr.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+        if (rawClean.length < 3) return null; 
+        
+        let exact = globalDosenData.find(d => String(d.nama).toLowerCase().replace(/[^a-z0-9\s]/g, '').trim() === rawClean);
+        if(exact) return exact.nama;
+
+        let rawWords = rawClean.split(/\s+/).filter(w => w.length > 2 && w !== 'dan' && w !== 'and');
+        if (rawWords.length >= 2) {
+            let deepMatch = globalDosenData.find(d => {
+                let offClean = String(d.nama).toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+                return rawWords.every(w => offClean.includes(w));
+            });
+            if(deepMatch) return deepMatch.nama;
+        }
+        
+        let directMatch = globalDosenData.find(d => String(d.nama).toLowerCase().includes(rawClean));
+        if(directMatch && rawClean.length > 6) return directMatch.nama;
+
+        return null; 
+    }
+
+    // ==========================================
+    // 🧠 KAMUS KAJIAN SMART SUBSTRING
+    // ==========================================
+    const kamusKajianGlobal = {
+        "Ekonomi dan Industri Halal": ['halal', 'kosmetik', 'wardah', 'makanan', 'wisata', 'sertifikasi', 'logistik', 'logistics', 'pariwisata', 'hotel', 'konsumen', 'konsumsi'],
+        "Filantropi Zakat Infak, Sedekah dan Wakaf": ['zakat', 'wakaf', 'infak', 'sedekah', 'ziswaf', 'filantropi', 'fundraising', 'baznas', 'amil', 'laz', 'cash waqf', 'donasi', 'infaq', 'shadaqah', 'muzakki'],
+        "Industri Jasa Keuangan & Perbankan Syariah": ['bank', 'perbankan', 'pembiayaan', 'kredit', 'mobile banking', 'bpr', 'murabahah', 'mudharabah', 'musyarakah', 'deposito', 'tabungan', 'kpr', 'margin'],
+        "Industri Keuangan Non-Bank Syariah": ['asuransi', 'takaful', 'pegadaian', 'bmt', 'koperasi', 'fintech', 'financial technology', 'pinjol', 'non-bank', 'paylater', 'leasing'],
+        "Pasar Modal Syariah": ['saham', 'sukuk', 'pasar modal', 'reksa dana', 'investasi', 'bursa', 'efek', 'investor', 'capital market', 'obligasi', 'idx'],
+        "Pemikiran & Sejarah Ekonomi Islam": ['pemikiran', 'sejarah', 'tokoh', 'ibnu', 'al-ghazali', 'perspektif islam', 'kajian literatur', 'historis', 'hukum islam', 'maqashid', 'sistem ekonomi', 'ayat', 'tafsir', 'hadis'],
+        "Kewirausahaan, UMKM, BUMDes & Ekraf": ['wirausaha', 'entrepreneur', 'umkm', 'ukm', 'bumdes', 'ekonomi kreatif', 'bisnis', 'startup', 'industri kreatif', 'pengrajin', 'tenun', 'usaha', 'pedagang', 'pemberdayaan'],
+        "Pembangunan Ekonomi Berkelanjutan": ['pembangunan', 'berkelanjutan', 'sustainable', 'sustainability', 'green', 'hijau', 'sdgs', 'kemiskinan', 'kesejahteraan', 'lingkungan', 'konservasi', 'sosial', 'csr', 'emission', 'emisi', 'net zero', 'karbon']
+    };
+
+    function deteksiBidangKajian(teksJudul) {
+        let teks = teksJudul.toLowerCase();
+        if((teks.includes('mengajar') || teks.includes('praktikum') || teks.includes('asisten')) && !teks.includes('penelitian') && !teks.includes('jurnal')) return "Pendidikan / Pengajaran";
+        for (let k in kamusKajianGlobal) { if (kamusKajianGlobal[k].some(key => teks.includes(key))) return k; }
+        return "Kajian Lainnya / Umum";
+    }
+
+    function isYearInRange(d, valAwal, valAkhir) {
+        if(valAwal === 0 && valAkhir === 9999) return true;
+        let combined = String(d.semester||"") + " " + String(d.publish||"") + " " + String(d.tanggal||"");
+        let matchedYears = combined.match(/\b(20\d{2})\b/g);
+        if(!matchedYears) return false;
+        let yearNumbers = matchedYears.map(y => parseInt(y, 10));
+        return yearNumbers.some(y => y >= valAwal && y <= valAkhir);
+    }
+
+    // ==========================================
+    // 🔐 LOGIKA AUTENTIKASI SAAS
+    // ==========================================
+    window.onload = function() { checkSession(); };
+    function checkSession() { const token = sessionStorage.getItem('sikap_token'); if (token) { google.script.run.withSuccessHandler(res => { if(res && res.valid) openDashboard(res.nama); else logout(); }).withFailureHandler(err => { if(token === 'fallback-token' || token === 'mock-token-admin') openDashboard('Administrator'); }).checkSession(token); } }
+    function togglePass() { const input = document.getElementById("password"); const icon = document.getElementById("togglePassword"); if (input.type === "password") { input.type = "text"; icon.classList.replace("fa-eye", "fa-eye-slash"); } else { input.type = "password"; icon.classList.replace("fa-eye-slash", "fa-eye"); } }
+    function autoFill(u, p) { document.getElementById('username').value = u; document.getElementById('password').value = p; }
+    function login() {
+      const u = document.getElementById('username').value; const p = document.getElementById('password').value;
+      const btn = document.getElementById('btnLogin');
+      if(!u || !p) { showToast("Username dan Password wajib diisi!", "error"); return; }
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...'; btn.disabled = true;
+      google.script.run.withSuccessHandler(res => {
+          btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In to Dashboard'; btn.disabled = false;
+          if(res && res.success) { sessionStorage.setItem('sikap_token', res.token); openDashboard(res.nama); showToast("Login Berhasil!"); } else { showToast(res ? res.message : "Kredensial Salah", "error"); }
+      }).withFailureHandler(err => {
+          btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In to Dashboard'; btn.disabled = false;
+          if (u === 'admin' && p === 'admin123') { sessionStorage.setItem('sikap_token', 'mock-token-admin'); openDashboard('Administrator'); showToast("Login Offline/Netlify Berhasil!"); } else { showToast("Gagal terhubung ke API", "error"); }
+      }).login(u, p);
+    }
+    
+    function openDashboard(userName) { 
+        document.getElementById('login-container').style.display = 'none'; document.getElementById('main-sidebar').style.display = 'flex'; document.getElementById('main-app').style.display = 'block'; 
+        if(window.innerWidth <= 768) document.getElementById('mobile-nav').style.display = 'flex'; 
+        document.getElementById('lblUserRole').innerText = userName || 'Administrator'; 
+        loadDashboard(); 
+    }
+    
+    function logout() { sessionStorage.removeItem('sikap_token'); try { google.script.run.logout(); } catch(e) {} document.getElementById('login-container').style.display = 'flex'; document.getElementById('main-sidebar').style.display = 'none'; document.getElementById('main-app').style.display = 'none'; document.getElementById('mobile-nav').style.display = 'none'; document.getElementById('username').value = ''; document.getElementById('password').value = ''; }
+    function toggleSidebarHP() { const sb = document.querySelector('.sidebar'); const bd = document.getElementById('sidebarBackdrop'); sb.classList.toggle('muncul'); bd.style.display = sb.classList.contains('muncul') ? 'block' : 'none'; }
+    function switchPage(pageId) { 
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); 
+        document.getElementById('page-' + pageId).classList.add('active'); event.currentTarget.classList.add('active'); 
+        const sb = document.querySelector('.sidebar'); const bd = document.getElementById('sidebarBackdrop'); if(sb) sb.classList.remove('muncul'); if(bd) bd.style.display = 'none'; 
+        if(pageId === 'dashboard') loadDashboard(); 
+        if(pageId === 'rekap') { if(window.globalDataRekap.length === 0) loadRekap(); else renderRekapTable(); } 
+        if(pageId === 'tahunan') { if(window.globalDataRekap.length === 0) loadRekap(); else renderRekapTahunan(); } 
+        if(pageId === 'kajian')  { if(window.globalDataRekap.length === 0) loadRekap(); else renderPetaKajian(); } 
+    }
+    function showToast(msg, type='success') { const toast = document.getElementById('toast'); toast.innerText = msg; toast.style.background = type === 'success' ? '#10B981' : '#EF4444'; toast.style.display = 'block'; setTimeout(() => toast.style.display = 'none', 3000); }
+
+    // ==========================================
+    // DATA & DASHBOARD (SYNC ULTIMATE)
+    // ==========================================
+    let globalDosenData = [];
+    function loadDashboard() { 
+        document.getElementById('tbodyDosen').innerHTML = '<tr><td colspan="6" style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Menarik data...</td></tr>'; 
+        google.script.run.withSuccessHandler(res => { 
+            if(res.success) { 
+                document.getElementById('dashTotalDosen').innerText = res.totalDosen || 0; 
+                globalDosenData = res.dataDosen || []; 
+                renderTabelDosen(globalDosenData); updateDosenDropdowns(globalDosenData); 
+                loadRekap();
+            } else { document.getElementById('tbodyDosen').innerHTML = `<tr><td colspan="6" style="text-align:center; color:red;">Gagal API: ${res.error}</td></tr>`; }
+        }).withFailureHandler(err => { document.getElementById('tbodyDosen').innerHTML = `<tr><td colspan="6" style="text-align:center; color:red;">Data Kosong / Belum diset GAS URL.</td></tr>`; }).getDashboardData(); 
+    }
+    
+    function syncDashboardStats() {
+        if(!window.globalDataRekap) return;
+        let tKin = window.globalDataRekap.length;
+        let tPen = 0, tPkm = 0;
+        window.globalDataRekap.forEach(d => {
+            let k = String(d.kategori || "").toLowerCase();
+            if(k.includes('penelitian')) tPen++;
+            if(k.includes('pkm') || k.includes('pengabdian')) tPkm++;
+        });
+        document.getElementById('dashTotalKinerja').innerText = tKin;
+        document.getElementById('dashTotalPenelitian').innerText = tPen;
+        document.getElementById('dashTotalPKM').innerText = tPkm;
+    }
+
+    function renderTabelDosen(data) { let html = ''; if(data.length === 0) html = '<tr><td colspan="6" style="text-align:center;">Belum ada data dosen.</td></tr>'; data.forEach((d, i) => { html += `<tr><td>${i+1}</td><td style="font-weight:600;">${d.nama}</td><td>${d.nidn}</td><td>${d.prodi}</td><td><span class="badge badge-success">${d.jabatan}</span></td><td><button class="btn btn-primary btn-sm" onclick="editDosen('${d.id}')">Edit</button></td></tr>`; }); document.getElementById('tbodyDosen').innerHTML = html; }
+    function updateDosenDropdowns(data) { const sFilter = document.getElementById('filterDosenRekap'); const sInp = document.getElementById('inp_nama'); const sMit = document.getElementById('inp_mitra'); let oFil = '<option value="">-- Semua Dosen --</option>'; let oInp = '<option value="">-- Pilih Dosen --</option>'; let oMit = ''; data.forEach(d => { oFil += `<option value="${d.nama}">${d.nama}</option>`; oInp += `<option value="${d.nama}">${d.nama}</option>`; oMit += `<option value="${d.nama}">${d.nama}</option>`; }); if(sFilter) sFilter.innerHTML = oFil; if(sInp) sInp.innerHTML = oInp; if(sMit) sMit.innerHTML = oMit; }
+    function bukaModalDosen() { document.getElementById('dsn_id').value = ''; document.getElementById('dsn_nama').value = ''; document.getElementById('dsn_nidn').value = ''; document.getElementById('dsn_prodi').value = ''; document.getElementById('dsn_jabatan').value = ''; document.getElementById('modalDosenTitle').innerText = 'Tambah Dosen Baru'; document.getElementById('modalDosen').style.display = 'flex'; }
+    function editDosen(id) { const d = globalDosenData.find(x => x.id === id); if(d) { document.getElementById('dsn_id').value = d.id; document.getElementById('dsn_nama').value = d.nama; document.getElementById('dsn_nidn').value = d.nidn; document.getElementById('dsn_prodi').value = d.prodi; document.getElementById('dsn_jabatan').value = d.jabatan; document.getElementById('modalDosenTitle').innerText = 'Edit Dosen'; document.getElementById('modalDosen').style.display = 'flex'; } }
+    function tutupModalDosen() { document.getElementById('modalDosen').style.display = 'none'; }
+    function simpanDosenBaru() { const d = { id: document.getElementById('dsn_id').value, nama: document.getElementById('dsn_nama').value, nidn: document.getElementById('dsn_nidn').value, prodi: document.getElementById('dsn_prodi').value, jabatan: document.getElementById('dsn_jabatan').value }; if(!d.nama || !d.nidn) return showToast("Nama dan NIDN wajib diisi!", "error"); google.script.run.withSuccessHandler(res => { if(res.success) { showToast("Berhasil!"); tutupModalDosen(); loadDashboard(); } else showToast(res.error, "error"); })[d.id ? 'updateDosen' : 'simpanDosen'](d); }
+
+    // ==========================================
+    // FITUR IMPORT CSV SCHOLAR & EDIT LINK AKREDITASI
+    // ==========================================
+    function simpanKinerja() {
+       const btn = document.getElementById('btnSimpanKinerja'); const n = document.getElementById('inp_nama').value;
+       if(!n) { showToast("Pilih Nama Dosen!", "error"); return; }
+       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...'; btn.disabled = true;
+       const m = Array.from(document.getElementById('inp_mitra').selectedOptions).map(o => o.value);
+       const p = { nama: n, mitra: m.join(', '), semester: document.getElementById('inp_semester').value, publish: document.getElementById('inp_publish').value, kategori: document.getElementById('inp_kategori').value, subkategori: document.getElementById('inp_subkategori').value, judul: document.getElementById('inp_judul').value, link: document.getElementById('inp_link').value };
+       
+       google.script.run.withSuccessHandler(res => { 
+          btn.innerHTML = '<i class="fas fa-save"></i> Simpan ke Database'; btn.disabled = false; 
+          if(res && res.success) { showToast("Berhasil disimpan!"); document.getElementById('inp_judul').value = ''; document.getElementById('inp_link').value = ''; loadRekap(); switchPage('rekap'); } 
+          else { showToast("Gagal menyimpan", "error"); } 
+       }).withFailureHandler(err => { 
+          btn.innerHTML = '<i class="fas fa-save"></i> Simpan ke Database'; btn.disabled = false; document.getElementById('inp_judul').value = ''; document.getElementById('inp_link').value = ''; showToast("Request dikirim (Mode API).", "success"); 
+       }).simpanKinerja(p);
+    }
+
+    function importScholarCSV() {
+        const fileInput = document.getElementById('csvScholar'); const btn = document.getElementById('btnImportCSV'); const namaDosen = document.getElementById('inp_nama').value;
+        if(!namaDosen) { showToast("Pilih Nama Dosen Utama di form bawah terlebih dahulu!", "error"); return; }
+        if(fileInput.files.length === 0) { showToast("Pilih file CSV Google Scholar!", "error"); return; }
+        const file = fileInput.files[0]; const reader = new FileReader(); btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Membaca CSV...'; btn.disabled = true;
+        
+        reader.onload = function(e) {
+            const text = e.target.result; const rows = parseCSV(text);
+            if(rows.length < 2) { showToast("File CSV kosong", "error"); btn.innerHTML = '<i class="fas fa-rocket"></i> Proses Import CSV'; btn.disabled = false; return; }
+            let headers = rows[0].map(h => h.toLowerCase().trim());
+            let titleIdx = headers.findIndex(h => h.includes('title') || h.includes('judul'));
+            let dateIdx = headers.findIndex(h => h.includes('date') || h.includes('year') || h.includes('tahun'));
+            let authorsIdx = headers.findIndex(h => h.includes('author') || h.includes('penulis'));
+            
+            if(titleIdx === -1) { showToast("Format CSV tidak dikenali.", "error"); btn.innerHTML = '<i class="fas fa-rocket"></i> Proses Import CSV'; btn.disabled = false; return; }
+            let articles = [];
+            for(let i=1; i<rows.length; i++) {
+                if(!rows[i] || rows[i].length <= titleIdx || !rows[i][titleIdx]) continue;
+                let title = rows[i][titleIdx]; let pubDate = dateIdx !== -1 && rows[i][dateIdx] ? rows[i][dateIdx].substring(0,4) : "-"; let authors = authorsIdx !== -1 && rows[i][authorsIdx] ? rows[i][authorsIdx].substring(0, 80) : "";
+                
+                articles.push({ nama: namaDosen, mitra: "", semester: "Tahun " + pubDate, publish: pubDate, kategori: "Penelitian", subkategori: "Jurnal Internasional Bereputasi", judul: title, link: "Diimpor dari Google Scholar" });
+            }
+            if(articles.length === 0) { showToast("Tidak ada artikel di CSV", "error"); btn.innerHTML = '<i class="fas fa-rocket"></i> Proses Import CSV'; btn.disabled = false; return; }
+            saveArticlesSequentially(articles, btn, fileInput);
+        };
+        reader.readAsText(file);
+    }
+
+    async function saveArticlesSequentially(articles, btn, fileInput) {
+        let successCount = 0; let isMock = false;
+        for(let i=0; i<articles.length; i++) {
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Menyimpan ${i+1}/${articles.length}...`;
+            try { 
+                await new Promise((resolve, reject) => { 
+                    google.script.run.withSuccessHandler(res => { if(res && res.success) successCount++; resolve(); }).withFailureHandler(err => { if(err === "URL Belum Diisi") { isMock = true; successCount++; } resolve(); }).simpanKinerja(articles[i]); 
+                }); 
+            } catch(e) {}
+        }
+        btn.innerHTML = '<i class="fas fa-rocket"></i> Proses Import CSV'; btn.disabled = false; fileInput.value = ""; 
+        if(isMock) { showToast(`Selesai! ${successCount} artikel seolah diimpor (Mock Mode)`, "success"); } else { showToast(`Selesai! ${successCount} artikel diimpor.`, "success"); }
+        document.getElementById('tbodyRekap').innerHTML = '<tr><td colspan="8" style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Memperbarui data...</td></tr>';
+        loadRekap(); switchPage('rekap');
+    }
+
+    function parseCSV(str) {
+        const arr = []; let quote = false; let row = 0; let col = 0;
+        for (let c = 0; c < str.length; c++) { let cc = str[c], nc = str[c+1]; arr[row] = arr[row] || []; arr[row][col] = arr[row][col] || ''; if (cc == '"' && quote && nc == '"') { arr[row][col] += cc; ++c; continue; } if (cc == '"') { quote = !quote; continue; } if (cc == ',' && !quote) { ++col; continue; } if (cc == '\r' && nc == '\n' && !quote) { ++row; col = 0; ++c; continue; } if (cc == '\n' && !quote) { ++row; col = 0; continue; } if (cc == '\r' && !quote) { ++row; col = 0; continue; } arr[row][col] += cc; }
+        if(arr.length > 0 && arr[arr.length-1].length === 1 && arr[arr.length-1][0] === '') { arr.pop(); } return arr;
+    }
+
+    // ==========================================
+    // ⚙️ LOGIKA EDIT LINK BUKTI AKREDITASI
+    // ==========================================
+    function bukaModalEditBukti(id) {
+        let d = window.globalDataRekap.find(x => x._tempId === id);
+        if(!d) return;
+        document.getElementById('edit_nama_dosen').value = d.nama;
+        document.getElementById('edit_judul_kinerja').value = d.judul;
+        document.getElementById('edit_link_baru').value = (d.link && d.link.toLowerCase().includes('impor')) ? "" : d.link;
+        document.getElementById('modalEditBukti').style.display = 'flex';
+    }
+
+    function tutupModalEditBukti() {
+        document.getElementById('modalEditBukti').style.display = 'none';
+    }
+
+    function simpanLinkBukti() {
+        let nama = document.getElementById('edit_nama_dosen').value;
+        let judul = document.getElementById('edit_judul_kinerja').value;
+        let link = document.getElementById('edit_link_baru').value;
+        
+        if(!link) return showToast('Peringatan: Link bukti tidak boleh kosong!', 'error');
+
+        let payload = { nama: nama, judul: judul, link: link };
+        let btn = document.querySelector('#modalEditBukti .btn-primary');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+        btn.disabled = true;
+
+        if(typeof google === 'undefined' || GAS_API_URL === "URL_WEB_APP_GAS_ANDA_DISINI") {
+            setTimeout(() => {
+                btn.innerHTML = 'Simpan Bukti'; btn.disabled = false;
+                tutupModalEditBukti();
+                showToast("Mock Mode: Link berhasil diubah!", "success");
+                let d = window.globalDataRekap.find(x => x.nama === nama && x.judul === judul);
+                if(d) d.link = link;
+                renderRekapTable(); renderRekapTahunan();
+            }, 1000);
+            return;
+        }
+
+        google.script.run
+        .withSuccessHandler(res => {
+            btn.innerHTML = 'Simpan Bukti'; btn.disabled = false;
+            if(res && res.success) {
+                showToast('Link bukti berhasil diperbarui ke Google Sheet!', 'success');
+                tutupModalEditBukti();
+                loadRekap(); 
+            } else {
+                showToast(res.error || 'Gagal menyimpan ke Sheet', 'error');
+            }
+        })
+        .withFailureHandler(err => {
+            btn.innerHTML = 'Simpan Bukti'; btn.disabled = false;
+            showToast('Request dikirim (Mode API).', 'success');
+            tutupModalEditBukti();
+        })
+        .updateLinkKinerja(payload);
+    }
+
+    // ==========================================
+    // REKAP DATA & FILTER
+    // ==========================================
+    window.globalDataRekap = [];
+    
+    function loadRekap() { 
+        document.getElementById('tbodyRekap').innerHTML = '<tr><td colspan="8" style="text-align:center;">Menarik data...</td></tr>'; 
+        if(document.getElementById('tbodyTahunan')) document.getElementById('tbodyTahunan').innerHTML = '<tr><td colspan="7" style="text-align:center;">Menarik data...</td></tr>'; 
+        
+        google.script.run.withSuccessHandler(res => { 
+            if(res && res.success) { 
+                window.globalDataRekap = [];
+                let seen = new Set(); let uidCount = 0;
+                
+                (res.data || []).forEach(d => {
+                    let hd = healData(d);
+                    let offName = getOfficialDosenName(hd.nama); 
+                    
+                    if(offName) {
+                        hd.nama = offName; 
+                        let cleanTitle = String(hd.judul).toLowerCase().replace(/[^a-z0-9]/g, '');
+                        let uniqueKey = offName + "_" + cleanTitle;
+                        
+                        if(!seen.has(uniqueKey)) {
+                            seen.add(uniqueKey);
+                            hd._tempId = uidCount++; 
+                            window.globalDataRekap.push(hd);
+                        }
+                    }
+                });
+                syncDashboardStats(); renderRekapTable(); ekstrakTahunDropdown(); renderRekapTahunan(); renderPetaKajian(); 
+            } 
+        }).getDataKinerja(); 
+    }
+
+    function renderRekapTable() {
+      const fn = document.getElementById('filterDosenRekap') ? document.getElementById('filterDosenRekap').value.toLowerCase().replace(/[^a-z0-9]/g, '') : "";
+      const filterKat = document.getElementById('filterKategoriRekap') ? document.getElementById('filterKategoriRekap').value.toLowerCase() : "";
+      let yAwal = document.getElementById('filterAwalRekap').value; let yAkhir = document.getElementById('filterAkhirRekap').value;
+      let valAwal = yAwal ? parseInt(yAwal) : 0; let valAkhir = yAkhir ? parseInt(yAkhir) : 9999;
+
+      let df = window.globalDataRekap.filter(d => {
+         if(!isYearInRange(d, valAwal, valAkhir)) return false;
+         if(fn !== "" && !(d.nama || "").toLowerCase().replace(/[^a-z0-9]/g, '').includes(fn)) return false;
+         if(filterKat !== "") {
+             let k = String(d.kategori||"").toLowerCase();
+             if(filterKat === 'penelitian' && !k.includes('penelitian')) return false;
+             if(filterKat === 'pkm' && !(k.includes('pkm') || k.includes('pengabdian'))) return false;
+             if(filterKat === 'pendidikan' && !k.includes('pendidikan')) return false;
+         }
+         return true;
+      });
+
+      let html = ''; if(df.length === 0) html = `<tr><td colspan="8" style="text-align:center;">Belum ada data.</td></tr>`;
+      let p=0, k=0;
+      df.forEach((d, i) => {
+        let kat = (d.kategori || "").toLowerCase(); if(kat.includes('penelitian')) p++; if(kat.includes('pkm')) k++;
+        
+        let btnEditLink = `<button class="btn btn-warning btn-sm" onclick="bukaModalEditBukti(${d._tempId})" title="Edit Link Akreditasi"><i class="fas fa-edit"></i></button>`;
+        let bl = '';
+        if(d.link && d.link.toLowerCase().startsWith('http')) {
+            bl = `<div style="display:flex;gap:5px;"><a href="${d.link}" target="_blank" class="btn btn-primary btn-sm">Buka File</a> ${btnEditLink}</div>`;
+        } else {
+            bl = `<div style="display:flex;gap:5px;"><span class="badge badge-info" style="background:#e0f2fe; color:#0369a1; display:flex; align-items:center;">Import CSV</span> ${btnEditLink}</div>`;
+        }
+
+        let kajianTerdeteksi = deteksiBidangKajian(String(d.judul||"")+" "+String(d.subkategori||"")+" "+String(d.kategori||""));
+        let badgeKajian = `<br><span style="font-size:10px; color:var(--text-secondary); margin-top:5px; display:inline-block;"><i class="fas fa-tag" style="color:var(--primary);"></i> ${kajianTerdeteksi}</span>`;
+        html += `<tr><td>${i+1}</td><td style="font-size:12px;">${d.tanggal||'-'}</td><td style="font-weight:600;">${d.nama||'-'}</td><td>${d.semester||'-'}<br><span style="font-size:9px">Pub: ${d.publish||'-'}</span></td><td><span class="badge badge-success">${d.kategori||'-'}</span>${badgeKajian}</td><td><div style="font-weight:600;font-size:13px;line-height:1.4;">${d.judul||'-'}</div></td><td>${d.statusAI||'Selesai'}</td><td>${bl}</td></tr>`;
+      });
+      document.getElementById('tbodyRekap').innerHTML = html;
+      const sd = document.getElementById('rekapDosenStats'); if(fn !== "" && sd) { sd.style.display='flex'; document.getElementById('statNamaDosen').innerText=document.getElementById('filterDosenRekap').value; document.getElementById('statTotalDosen').innerText=df.length; document.getElementById('statPenelitianDosen').innerText=p; document.getElementById('statPKMDosen').innerText=k; } else if(sd) sd.style.display='none';
+    }
+
+    function getSemesterLabel(d) {
+      if(d.semester && d.semester.trim()!=="" && d.semester.trim()!=="-") return d.semester.trim();
+      let y="", m=0, pub=String(d.publish||"").trim(), tgl=String(d.tanggal||"").trim(); let my = pub.match(/\b(20\d{2})\b/); if(my) y=my[0]; else { let mt = tgl.match(/\b(20\d{2})\b/); if(mt) y=mt[0]; } let mm = tgl.match(/\/(\d{2})\//); if(mm) m=parseInt(mm[1],10);
+      if(y) return (m>=1 && m<=6) ? `Genap ${parseInt(y)-1}/${y}` : `Ganjil ${y}/${parseInt(y)+1}`; return "Semester Tidak Terdeteksi";
+    }
+    function ekstrakTahunDropdown() { const set = new Set(); window.globalDataRekap.forEach(d => { let s=getSemesterLabel(d); if(s && s!=="Semester Tidak Terdeteksi") set.add(s); }); let opts = '<option value="">-- Semua Semester --</option>'; Array.from(set).sort().reverse().forEach(s => opts += `<option value="${s}">${s}</option>`); const fl = document.getElementById('filterTahunLaporan'); if(fl) { const cv=fl.value; fl.innerHTML=opts; if(Array.from(set).includes(cv)) fl.value=cv; } }
+    
+    function renderRekapTahunan() {
+      const fs = document.getElementById('filterTahunLaporan').value; const fb = document.getElementById('filterBidangLaporan').value.toLowerCase();
+      document.getElementById('lblTahunPilih').innerText = fs === "" ? "Semua Semester" : fs;
+      let yAwal = document.getElementById('filterAwalTahunan').value; let yAkhir = document.getElementById('filterAkhirTahunan').value;
+      let valAwal = yAwal ? parseInt(yAwal) : 0; let valAkhir = yAkhir ? parseInt(yAkhir) : 9999;
+
+      let df = window.globalDataRekap.filter(d => {
+         if(!isYearInRange(d, valAwal, valAkhir)) return false;
+         return fs === "" || getSemesterLabel(d) === fs;
+      });
+
+      if(fb!=="") df = df.filter(d => { let tg=(String(d.kategori||"")+" "+String(d.subkategori||"")+" "+String(d.judul||"")).toLowerCase(); if(fb==='pkm') return tg.includes('pkm')||tg.includes('pengabdian'); if(fb==='penelitian') return tg.includes('penelitian')||tg.includes('jurnal'); if(fb==='pendidikan') return tg.includes('pendidikan')||tg.includes('ajar'); return tg.includes(fb); });
+      let html = ''; if(df.length===0) html = `<tr><td colspan="7" style="text-align:center;">Tidak ada data.</td></tr>`;
+      let p=0, k=0, pd=0;
+      df.forEach((d, i) => {
+        let tg=(String(d.kategori||"")+" "+String(d.subkategori||"")+" "+String(d.judul||"")).toLowerCase();
+        let isK=tg.includes('pkm')||tg.includes('pengabdian'); let isP=tg.includes('penelitian')||tg.includes('jurnal'); let isPd=tg.includes('pendidikan')||tg.includes('ajar');
+        if(isP && !isK) p++; if(isK) k++; if(isPd) pd++;
+        
+        let btnEditLink = `<button class="btn btn-warning btn-sm" onclick="bukaModalEditBukti(${d._tempId})" title="Edit Link Akreditasi"><i class="fas fa-edit"></i></button>`;
+        let bl = '';
+        if(d.link && d.link.toLowerCase().startsWith('http')) {
+            bl = `<div style="display:flex;gap:5px;"><a href="${d.link}" target="_blank" class="btn btn-primary btn-sm">Buka File</a> ${btnEditLink}</div>`;
+        } else {
+            bl = `<div style="display:flex;gap:5px;"><span class="badge badge-info" style="background:#e0f2fe; color:#0369a1; display:flex; align-items:center;">Import CSV</span> ${btnEditLink}</div>`;
+        }
+
+        let bKat = `<span class="badge badge-success">${d.kategori||(isK?'PKM':(isP?'Penelitian':'Pendidikan'))}</span>`;
+        let kajianTerdeteksi = deteksiBidangKajian(tg); let badgeKajian = `<br><span style="font-size:10px; color:var(--text-secondary); margin-top:5px; display:inline-block;"><i class="fas fa-tag" style="color:var(--primary);"></i> ${kajianTerdeteksi}</span>`;
+        html += `<tr><td>${i+1}</td><td style="font-size:12px;"><b>${d.semester||getSemesterLabel(d)}</b><br><span style="font-size:10px;">Publish: ${d.publish||'-'}</span></td><td style="font-weight:600;">${d.nama||'-'}</td><td>${bKat}<br><span style="font-size:10px;">${d.subkategori||'-'}</span>${badgeKajian}</td><td><b>${d.judul||'-'}</b></td><td>${d.peran||'-'}</td><td style="text-align:center;">${bl}</td></tr>`;
+      });
+      document.getElementById('tbodyTahunan').innerHTML = html; document.getElementById('statTahunTotal').innerText=df.length; document.getElementById('statTahunPenelitian').innerText=p; document.getElementById('statTahunPKM').innerText=k; document.getElementById('statTahunPendidikan').innerText=pd;
+    }
+
+    // ==========================================
+    // 🎨 GRAFIK PETA KAJIAN
+    // ==========================================
+    let globalChartKajian = null;
+    const warnaKlaster = [ '#059669', '#2563eb', '#7c3aed', '#db2777', '#ea580c', '#0d9488', '#4f46e5', '#e11d48', '#64748b' ];
+
+    function renderPetaKajian() {
+       let yAwal = document.getElementById('filterAwalKajian').value; let yAkhir = document.getElementById('filterAkhirKajian').value;
+       let valAwal = yAwal ? parseInt(yAwal) : 0; let valAkhir = yAkhir ? parseInt(yAkhir) : 9999;
+       const data = (window.globalDataRekap || []).filter(d => isYearInRange(d, valAwal, valAkhir));
+       const kamusLokasi = { "Ekonomi dan Industri Halal": { pen: 0, pkm: 0, total: 0 }, "Filantropi Zakat Infak, Sedekah dan Wakaf": { pen: 0, pkm: 0, total: 0 }, "Industri Jasa Keuangan & Perbankan Syariah": { pen: 0, pkm: 0, total: 0 }, "Industri Keuangan Non-Bank Syariah": { pen: 0, pkm: 0, total: 0 }, "Pasar Modal Syariah": { pen: 0, pkm: 0, total: 0 }, "Pemikiran & Sejarah Ekonomi Islam": { pen: 0, pkm: 0, total: 0 }, "Kewirausahaan, UMKM, BUMDes & Ekraf": { pen: 0, pkm: 0, total: 0 }, "Pembangunan Ekonomi Berkelanjutan": { pen: 0, pkm: 0, total: 0 }, "Kajian Lainnya / Umum": { pen: 0, pkm: 0, total: 0 } };
+       data.forEach(d => { let teks = (String(d.judul||"")+" "+String(d.subkategori||"")+" "+String(d.kategori||"")).toLowerCase(); let isPKM = teks.includes('pkm') || teks.includes('pengabdian'); let namaKlaster = deteksiBidangKajian(teks); if(kamusLokasi[namaKlaster]) { if(isPKM) kamusLokasi[namaKlaster].pkm++; else kamusLokasi[namaKlaster].pen++; kamusLokasi[namaKlaster].total++; } });
+       delete kamusLokasi["Pendidikan / Pengajaran"];
+       const hasilUrut = Object.keys(kamusLokasi).map(k => ({ nama: k, pen: kamusLokasi[k].pen, pkm: kamusLokasi[k].pkm, total: kamusLokasi[k].total })).sort((a,b) => b.total - a.total);
+       let tTotal = hasilUrut.reduce((a, c) => a + c.total, 0) || 1; let htmlTabel = '';
+       hasilUrut.forEach((item, idx) => {
+          let persen = ((item.total / tTotal) * 100).toFixed(1); let bDom = idx === 0 && item.total > 0 ? `<span class="badge badge-warning" style="background:#fef08a; color:#854d0e;">Dominan</span>` : `<span style="color:var(--text-muted); font-size:12px;">Normal</span>`;
+          htmlTabel += `<tr><td>${idx+1}</td><td style="font-weight:600; line-height: 1.4;">${item.nama}</td><td style="text-align:center;"><span class="badge" style="background:#dcfce7; color:#166534;">${item.pen}</span></td><td style="text-align:center;"><span class="badge" style="background:#fef3c7; color:#92400e;">${item.pkm}</span></td><td style="text-align:center; font-weight:bold; font-size:16px; color:var(--primary);">${item.total}</td><td><div style="display:flex; align-items:center; gap:8px;"><div style="flex:1; background:#e2e8f0; height:8px; border-radius:4px;"><div style="width:${persen}%; background:var(--primary); height:100%; border-radius:4px;"></div></div><span style="font-size:11px; font-weight:600;">${persen}%</span></div></td><td>${bDom}</td></tr>`;
+       });
+       document.getElementById('tbodyKajian').innerHTML = htmlTabel;
+       if(hasilUrut[0] && hasilUrut[0].total > 0) { document.getElementById('statKajianDominan').innerText = hasilUrut[0].nama; document.getElementById('statKajianPorsi').innerText = `Menyumbang ${((hasilUrut[0].total/tTotal)*100).toFixed(0)}% dari total kinerja`; } else { document.getElementById('statKajianDominan').innerText = "Belum Ada Data"; }
+       document.getElementById('statTotalKajianItem').innerText = (hasilUrut.filter(h => h.total > 0).length) + " Bidang Riset"; gambarGrafikKajian(hasilUrut);
+    }
+
+    function gambarGrafikKajian(dataUrut) {
+       const ctx = document.getElementById('chartKajianCanvas').getContext('2d'); if(globalChartKajian) globalChartKajian.destroy();
+       const bgColors = dataUrut.map((_, i) => warnaKlaster[i % warnaKlaster.length]);
+       globalChartKajian = new Chart(ctx, { type: 'bar', data: { labels: dataUrut.map(d => { let shortName = d.nama; if(shortName.length > 20) { shortName = shortName.substring(0, 18) + '...'; } return shortName; }), datasets: [{ label: 'Total Kinerja (Penelitian & PKM)', data: dataUrut.map(d => d.total), backgroundColor: bgColors, borderRadius: 6, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(context) { let idx = context.dataIndex; let d = dataUrut[idx]; return ` Total: ${d.total} (Penelitian: ${d.pen}, PKM: ${d.pkm})`; } } } }, scales: { x: { ticks: { font: { size:10 }, maxRotation: 45, minRotation: 45 } }, y: { beginAtZero: true, ticks: { stepSize: 1 } } } } });
+    }
+  </script>
+</body>
+</html>
